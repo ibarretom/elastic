@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  es01:
+    image: "docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      node.name: es01
+      discovery.seed_hosts: es01,es02,es03
+      cluster.initial_master_nodes: es01,es02,es03
+      cluster.name: mycluster
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: -Xms256m -Xmx256m
+    volumes:
+      - "es-data-es01:/usr/share/elasticsearch/data"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+volumes:
+  es-data-es01:
