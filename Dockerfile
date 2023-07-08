@@ -11,5 +11,5 @@ EXPOSE 8981
 ENV ZK_HOST zoo1:2181
 
 # Start Solr in SolrCloud mode
-CMD ["solr-precreate", "mycollection", "/opt/solr/server/solr/configsets/_default"]
-CMD ["solr-cloud", "-s", "solr1e:8983"]
+CMD ["solr", "create_core", "-c", "mycollection", "-d", "_default"]
+CMD ["solr", "cloud", "-h", "solr1e", "-p", "8983"]
